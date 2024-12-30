@@ -4,7 +4,9 @@
   "scripts": {
     "start": "ng serve --open",
     "build": "ng build",
-    "watch": "ng build --watch --configuration development"
+    "watch": "ng build --watch --configuration development",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "private": true,
   "dependencies": {
@@ -28,13 +30,25 @@
     "@angular/cli": "~16.1.6",
     "@angular/compiler-cli": "^16.1.0",
     "@angular/localize": "^16.1.0",
+    "@eslint/eslintrc": "^3.2.0",
+    "@eslint/js": "^9.17.0",
     "@types/jasmine": "~4.3.0",
+    "@typescript-eslint/eslint-plugin": "^8.18.2",
+    "@typescript-eslint/parser": "^8.18.2",
+    "eslint": "^9.17.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "eslint-plugin-promise": "^6.0.0",
+    "globals": "^15.14.0",
     "jasmine-core": "~4.6.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "prettier": "^3.4.2",
     "typescript": "~5.1.3"
   }
 }

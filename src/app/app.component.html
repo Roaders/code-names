@@ -1,4 +1,3 @@
-
 <div class="container">
 
     <h1>Code Names</h1>
@@ -7,4 +6,44 @@
         <div *ngFor="let cell of row" [ngClass]="getCellStyle(cell)" class="col-sm border p-3 m-1 cell">
         </div>
     </div>
-  </div>
+
+    <div *ngFor="let team of teams; index as index">
+        <h3 [ngClass]="getTextStyle(index)" class="d-inline">{{team.displayName}}</h3>
+        <div class="d-inline ps-2">{{team.cells.length}} cards</div>
+    </div>
+
+    <div class="pt-3">
+        <h3>Game Settings</h3>
+        <div class="mb-3 row">
+            <label for="teamCount" class="col-sm-2 col-form-label">Team Count</label>
+            <div class="col-1">
+                <input type="number" id="teamCount" class="form-control" [(ngModel)]="teamCount" min="2" max="4">
+            </div>
+        </div>
+
+        <div class="mb-3 row">
+            <label for="gridSize" class="col-sm-2 col-form-label">Grid Size</label>
+            <div class="col-1">
+                <input type="number" id="gridSize" class="form-control" [(ngModel)]="gridSize" min="2">
+            </div>
+        </div>
+
+        <div class="mb-3 row">
+            <label for="cardCount" class="col-sm-2 col-form-label">Card Count</label>
+            <div class="col-1">
+                <input type="number" id="cardCount" class="form-control" [(ngModel)]="cardCount" min="2">
+            </div>
+        </div>
+
+        <div class="mb-3 row">
+            <label for="assassinCount" class="col-sm-2 col-form-label">Assassin Count</label>
+            <div class="col-1">
+                <input type="number" id="assassinCount" class="form-control" [(ngModel)]="assassinCount" min="1">
+            </div>
+        </div>
+
+        <input type="button" class="btn btn-primary" value="Generate" (click)="newGame()">
+    
+    </div>
+
+</div>
