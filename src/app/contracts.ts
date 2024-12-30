@@ -1,7 +1,7 @@
 type Tuple<T, N extends number> = number extends N ? T[] : TupleAppend<T, N, []>;
 type TupleAppend<T, N extends number, R extends unknown[]> = R['length'] extends N ? R : TupleAppend<T, N, [T, ...R]>;
 
-export type Cell = { row: string; column: string };
+export type Cell = { row: number; column: number };
 
 export type Row<N extends number> = Tuple<Cell, N>;
 
