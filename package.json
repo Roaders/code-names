@@ -2,7 +2,9 @@
   "name": "codenames",
   "version": "0.0.0",
   "scripts": {
+    "clean": "rimraf dist",
     "start": "ng serve --open",
+    "prebuild": "npm run clean",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "lint": "eslint .",
@@ -49,6 +51,7 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "prettier": "^3.4.2",
+    "rimraf": "^6.0.1",
     "typescript": "~5.1.3"
   }
 }
