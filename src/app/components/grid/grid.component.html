@@ -55,12 +55,18 @@
             </div>
         </div>
 
+        <div *ngIf="errorMessage != null" class="alert alert-danger py-2 col-6" role="alert">{{errorMessage}}</div>
+
         <div>
             <input type="button" class="btn btn-secondary me-2" value="Reset" (click)="reset()">
             <input type="button" class="btn btn-primary" value="Generate" (click)="newGame()">
         </div>
 
 
+    </div>
+
+    <div class="pt-3">
+        <a href="https://github.com/Roaders/code-names" target="_blank">GitHub</a>
     </div>
 
 </div>

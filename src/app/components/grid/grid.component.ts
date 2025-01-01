@@ -4,7 +4,7 @@ import { Location } from '@angular/common'; // Import Location
 import { Cell, Grid, Row, Team, TeamCount } from '../../contracts';
 
 const displayNames = ['Team One', 'Team Two', 'Team Three', 'Team Four'];
-const DEFAULT_GRID_SIZE = 6;
+const DEFAULT_GRID_SIZE = 5;
 const DEFAULT_TEAM_COUNT = 2;
 const DEFAULT_CARD_COUNT = 8;
 const DEFAULT_ASSASSIN_COUNT = 1;
@@ -24,6 +24,12 @@ export class GridComponent {
 
     public assassins?: Cell[];
     public teams?: Team[];
+
+    private _errorMessage: string | undefined;
+
+    public get errorMessage(): string | undefined {
+        return this._errorMessage;
+    }
 
     constructor(
         route: ActivatedRoute,
@@ -60,7 +66,7 @@ export class GridComponent {
             return `bg-dark`;
         }
 
-        if (this.teams?.[0].cells.some((teamCard) => cellMatch(teamCard, cell))) {
+        if (this.teams?.[0]?.cells.some((teamCard) => cellMatch(teamCard, cell))) {
             return `bg-primary`;
         }
 
@@ -126,6 +132,8 @@ export class GridComponent {
         cardCount: number,
         assassinCount: number,
     ): { assassins: Cell[]; teams: Team[]; grid: Grid<number> } {
+        this._errorMessage = undefined;
+
         console.log(`Generating new game`, {
             gridSize: this.gridSize,
             teamCount: this.teamCount,
@@ -139,23 +147,38 @@ export class GridComponent {
 
         const assassins = this.assassins ?? Array.from({ length: assassinCount }).map(() => randomItem(cells));
 
-        const teamRandomiser = randomItem([0, ...Array.from({ length: teamCount - 1 }).map((_, index) => index + 1)]);
-        const teams =
-            this.teams ??
-            Array.from({ length: teamCount }).map((_, index) => {
-                const teamCards = this.calculateCardCount(cardCount, index, teamRandomiser);
+        try {
+            const teamRandomiser = randomItem([
+                0,
+                ...Array.from({ length: teamCount - 1 }).map((_, index) => index + 1),
+            ]);
+            const teams =
+                this.teams ??
+                Array.from({ length: teamCount }).map((_, index) => {
+                    const teamCards = this.calculateCardCount(cardCount, index, teamRandomiser);
 
-                return {
-                    displayName: displayNames[index],
-                    cells: Array.from({ length: teamCards }).map(() => randomItem(cells)),
-                };
-            });
+                    return {
+                        displayName: displayNames[index],
+                        cells: Array.from({ length: teamCards }).map(() => randomItem(cells)),
+                    };
+                });
 
-        this.location.replaceState(
-            `/game/${this.teamCount}/${this.gridSize}/${this.cardCount}/${this.assassinCount}/${stringifyCells(assassins)}/${stringifyTeams(teams)}`,
-        );
+            this.location.replaceState(
+                `/game/${this.teamCount}/${this.gridSize}/${this.cardCount}/${this.assassinCount}/${stringifyCells(assassins)}/${stringifyTeams(teams)}`,
+            );
 
-        return { assassins, teams, grid };
+            return { assassins, teams, grid };
+        } catch (error) {
+            if (cells.length === 0) {
+                this._errorMessage = `Grid not big enough for team and card count!`;
+            } else {
+                this._errorMessage = String(error);
+            }
+
+            console.error(`Error generating game`, { error, message: this._errorMessage });
+
+            return { assassins: [], teams: [], grid };
+        }
     }
 
     private calculateCardCount(cardCount: number, teamIndex: number, teamRandomiser: number): number {
