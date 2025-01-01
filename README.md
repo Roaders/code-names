@@ -1,15 +1,24 @@
 # CodeNames
 
-CodeNames is an Angular-based web application for playing the popular word game "Codenames". This application allows users to set up a game with customizable settings and play with multiple teams.
+CodeNames is a web application for playing the popular word game "Codenames". This application allows users to set up a game with customizable settings and play with multiple teams.
 
 ## Features
 
 - Customizable game settings including team count, grid size, card count, and assassin count.
 - Dynamic grid generation based on the specified settings.
-- Route parameters to save and share game configurations.
-- Responsive design using Bootstrap.
+- Shareable url allows a generated board to be shared between players of the game
+- play with no assassin or multiple assassins
 
-## Getting Started
+## How to Play
+
+ - Generate your own custom board with the desired number of teams (up to 4), assassin count (usually 1 less than the number of teams), card count and grid size.
+ - If you are playing with 3 teams you will most likely need to generate a 6 * 6 grid so that it is big enough for the all cards for all the teams (dependent on the number of cards and assassins selected)
+ - Once the board is generated share the url of the board with all the Spymasters playing the game. They will all get the same randomly generated board
+ - Lay out the codenames as usual according to the grid size generated
+ - If playing with more than 2 teams (or with more than 8 cards per team) additional cards will be needed for the new teams. The colors are green and light blue. These can be made from any card or paper or could even be buttons or any sort of marker.
+ - The team with the randomly selected additional card goes first.
+
+## Building the application
 
 ### Prerequisites
 
