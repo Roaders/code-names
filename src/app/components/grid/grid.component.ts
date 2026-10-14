@@ -25,6 +25,8 @@ export class GridComponent {
     public assassins?: Cell[];
     public teams?: Team[];
 
+    public readonly disabledCells = new Set<Cell>();
+
     private _errorMessage: string | undefined;
 
     public get errorMessage(): string | undefined {
@@ -85,6 +87,12 @@ export class GridComponent {
         return `bg-warning bg-opacity-50`;
     }
 
+    public toggleCell(cell: Cell): void {
+        if (!this.disabledCells.delete(cell)) {
+            this.disabledCells.add(cell);
+        }
+    }
+
     public getTextStyle(team: number): string | undefined {
         switch (team) {
             case 0:
@@ -133,6 +141,7 @@ export class GridComponent {
         assassinCount: number,
     ): { assassins: Cell[]; teams: Team[]; grid: Grid<number> } {
         this._errorMessage = undefined;
+        this.disabledCells.clear();
 
         console.log(`Generating new game`, {
             gridSize: this.gridSize,
