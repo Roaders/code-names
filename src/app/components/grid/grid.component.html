@@ -13,7 +13,9 @@
         <div *ngFor="let row of grid" class="row flex-nowrap">
             <!-- row number -->
             <div class="col-sm end-cell">{{row[0].row + 1}}</div>
-            <div *ngFor="let cell of row" [ngClass]="getCellStyle(cell)" class="col-sm border p-3 m-1 cell">
+            <div *ngFor="let cell of row" [ngClass]="getCellStyle(cell)" [class.cell-disabled]="disabledCells.has(cell)"
+                class="col-sm border p-3 m-1 cell" role="button" [attr.aria-pressed]="disabledCells.has(cell)"
+                (click)="toggleCell(cell)">
             </div>
         </div>
     </div>
