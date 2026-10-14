@@ -29,8 +29,8 @@ CodeNames is a web application for playing the popular word game "Codenames". Th
 
 1. Clone the repository:
     ```sh
-    git clone https://github.com/your-username/codenames.git
-    cd codenames
+    git clone https://github.com/Roaders/code-names.git
+    cd code-names
     ```
 
 2. Install the dependencies:
@@ -56,10 +56,12 @@ npm run build
 
 The build artifacts will be stored in the `dist/` directory.
 
-### Running the website
+### Hosting
 
-The app is available at:  
-[https://codenames.cineworld-planner.co.uk/](https://codenames.cineworld-planner.co.uk/)
+The app is hosted on GitHub Pages at:  
+[https://roaders.github.io/code-names/](https://roaders.github.io/code-names/)
+
+The [Build and deploy](.github/workflows/deploy.yml) GitHub Actions workflow lints and builds the app on every push and pull request. Pushes to `master` are then deployed to GitHub Pages. The app uses hash-based routing and a relative base href, so it works from the `/code-names/` sub-path without extra configuration.
 
 ## Project Structure
 
